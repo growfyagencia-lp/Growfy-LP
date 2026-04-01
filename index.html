@@ -675,13 +675,17 @@
         },
         body: JSON.stringify(data)
       });
-      if (!res.ok) throw new Error('Erro ' + res.status);
+      if (!res.ok) {
+        const body = await res.text();
+        console.error('Supabase status:', res.status, body);
+        throw new Error('Status ' + res.status + ': ' + body);
+      }
       window.location.href = 'obrigado.html';
     } catch(err) {
-      console.error('Supabase error:', err);
+      console.error('Supabase error:', err.message);
       btn.textContent = originalText;
       btn.disabled = false;
-      alert('Ocorreu um erro ao enviar. Por favor, tente novamente.');
+      alert('Erro ao enviar: ' + err.message);
     }
   }
 
