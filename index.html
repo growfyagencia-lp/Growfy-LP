@@ -680,7 +680,7 @@
         console.error('Supabase status:', res.status, body);
         throw new Error('Status ' + res.status + ': ' + body);
       }
-      window.location.href = 'obrigado.html';
+      window.location.href = '/obrigado/';
     } catch(err) {
       console.error('Supabase error:', err.message);
       btn.textContent = originalText;
